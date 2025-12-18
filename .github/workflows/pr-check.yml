@@ -10,6 +10,21 @@ jobs:
     
     steps:
     - uses: actions/checkout@v4
+
+    - name: Cache Swift Packages
+      uses: actions/cache@v4
+      with:
+        path: build/SourcePackages
+        key: ${{ runner.os }}-spm-${{ hashFiles('Input Source Pro.xcodeproj/project.pbxproj') }}
+        restore-keys: |
+          ${{ runner.os }}-spm-
+
+    - name: Resolve Dependencies
+      run: |
+        xcodebuild -resolvePackageDependencies \
+          -scheme "Input Source Pro" \
+          -configuration Debug \
+          -derivedDataPath build
     
     - name: Build App
       run: |
