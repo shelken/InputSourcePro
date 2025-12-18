@@ -62,6 +62,33 @@ Quickly toggle between input languages with configurable keyboard shortcuts.
 </a>
 
 
+## Beta 版特性 (Features)
+
+相比原版 Input Source Pro，此 Beta 版本增加了以下特性：
+
+- **声明式配置**：支持通过外部 JSON 文件管理应用规则，方便进行版本控制（如 dotfiles）。
+- **数据隔离**：使用独立的 Bundle ID (`space.ooooo.Input-Source-Pro.Beta`) 和存储路径，与原版共存互不干扰。
+- **自动同步**：修改配置文件后立即生效，无需重启应用。
+
+### 配置文件 (Configuration)
+
+配置文件位于 `~/.config/inputsourcepro/config.json`。
+
+**示例配置：**
+
+```json
+{
+  "appRules": {
+    "com.apple.finder": "com.apple.keylayout.ABC",
+    "com.microsoft.VSCode": "com.apple.keylayout.ABC",
+    "com.tencent.xinWeChat": "im.rime.inputmethod.Squirrel.Hans"
+  }
+}
+```
+
+- **键 (Key)**: 应用的 Bundle ID
+- **值 (Value)**: 输入法 ID
+
 ## Installation
 
 ### Using Homebrew

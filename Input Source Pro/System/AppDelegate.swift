@@ -1,8 +1,8 @@
+import Alamofire
 import Cocoa
 import Combine
-import SwiftUI
-import Alamofire
 import LaunchAtLogin
+import SwiftUI
 
 class AppDelegate: NSObject, NSApplicationDelegate {
     var navigationVM: NavigationVM!
@@ -14,6 +14,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var feedbackVM: FeedbackVM!
     var indicatorWindowController: IndicatorWindowController!
     var statusItemController: StatusItemController!
+    var configImporter: ConfigImporter!
 
     func applicationDidFinishLaunching(_: Notification) {
         feedbackVM = FeedbackVM()
@@ -22,7 +23,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         preferencesVM = PreferencesVM(permissionsVM: permissionsVM)
         applicationVM = ApplicationVM(preferencesVM: preferencesVM)
         inputSourceVM = InputSourceVM(preferencesVM: preferencesVM)
-        indicatorVM = IndicatorVM(permissionsVM: permissionsVM, preferencesVM: preferencesVM, applicationVM: applicationVM, inputSourceVM: inputSourceVM)
+        indicatorVM = IndicatorVM(
+            permissionsVM: permissionsVM,
+            preferencesVM: preferencesVM,
+            applicationVM: applicationVM,
+            inputSourceVM: inputSourceVM
+        )
 
         indicatorWindowController = IndicatorWindowController(
             permissionsVM: permissionsVM,
@@ -41,11 +47,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             feedbackVM: feedbackVM,
             inputSourceVM: inputSourceVM
         )
-        
+
         LaunchAtLogin.migrateIfNeeded()
         openPreferencesAtFirstLaunch()
         sendLaunchPing()
         updateInstallVersionInfo()
+
+        // Initialize config importer for external JSON config support
+        configImporter = ConfigImporter(preferencesVM: preferencesVM)
     }
 
     func applicationDidBecomeActive(_: Notification) {
@@ -54,7 +63,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @MainActor
     func openPreferencesAtFirstLaunch() {
-        if preferencesVM.preferences.prevInstalledBuildVersion != preferencesVM.preferences.buildVersion {
+        if preferencesVM.preferences.prevInstalledBuildVersion
+            != preferencesVM.preferences.buildVersion
+        {
             statusItemController.openPreferences()
         }
     }
@@ -63,7 +74,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func updateInstallVersionInfo() {
         preferencesVM.preferences.prevInstalledBuildVersion = preferencesVM.preferences.buildVersion
     }
-    
+
     @MainActor
     func sendLaunchPing() {
         let url = "https://inputsource.pro/api/launch"
@@ -71,9 +82,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             "prevInstalledBuildVersion": "\(preferencesVM.preferences.prevInstalledBuildVersion)",
             "shortVersion": Bundle.main.shortVersion,
             "buildVersion": "\(Bundle.main.buildVersion)",
-            "osVersion": ProcessInfo.processInfo.operatingSystemVersionString
+            "osVersion": ProcessInfo.processInfo.operatingSystemVersionString,
         ]
-        
+
         AF.request(
             url,
             method: .post,
@@ -84,7 +95,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             switch response.result {
             case .success:
                 print("Launch ping sent successfully.")
-            case let .failure(error):
+            case .failure(let error):
                 print("Failed to send launch ping:", error)
             }
         }

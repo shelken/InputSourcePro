@@ -1,0 +1,23 @@
+name: PR Check
+
+on:
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-check:
+    runs-on: macos-15
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Build App
+      run: |
+        xcodebuild \
+          -scheme "Input Source Pro" \
+          -configuration Debug \
+          -derivedDataPath build \
+          CODE_SIGN_IDENTITY="-" \
+          CODE_SIGNING_REQUIRED=NO \
+          CODE_SIGNING_ALLOWED=NO \
+          build
