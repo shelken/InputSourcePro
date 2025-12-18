@@ -1107,7 +1107,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 2.6.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "space.ooooo.Input-Source-Pro.Beta";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Input Source Pro Beta";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};
@@ -1144,7 +1144,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 2.6.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "space.ooooo.Input-Source-Pro.Beta";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Input Source Pro Beta";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};
