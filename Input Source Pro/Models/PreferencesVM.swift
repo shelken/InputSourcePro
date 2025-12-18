@@ -43,6 +43,19 @@ final class PreferencesVM: NSObject, ObservableObject {
     init(permissionsVM: PermissionsVM) {
         self.permissionsVM = permissionsVM
         container = NSPersistentContainer(name: "Main")
+        
+        // Use Bundle ID-based storage path to isolate dev builds from production
+        if let bundleId = Bundle.main.bundleIdentifier {
+            let appSupportURL = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
+            let storeURL = appSupportURL.appendingPathComponent(bundleId).appendingPathComponent("Main.sqlite")
+            
+            // Create directory if needed
+            try? FileManager.default.createDirectory(at: storeURL.deletingLastPathComponent(), withIntermediateDirectories: true)
+            
+            let storeDescription = NSPersistentStoreDescription(url: storeURL)
+            container.persistentStoreDescriptions = [storeDescription]
+        }
+        
         mainStorage = MainStorage(container: container)
         
         super.init();

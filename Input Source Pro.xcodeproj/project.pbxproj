@@ -158,6 +158,7 @@
 		D5E8C9332A29BC38008BDABE /* AXSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D5E8C9322A29BC38008BDABE /* AXSwift */; };
 		D5F73B022A2C1DCD00BBC10A /* InputSourceVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F73B012A2C1DCD00BBC10A /* InputSourceVM.swift */; };
 		D5FC8F552A4134B5002AE1F2 /* IndicatorSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5FC8F542A4134B5002AE1F2 /* IndicatorSize.swift */; };
+		CFD89022254AB14A568D2D65 /* ConfigImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF35BD14E14B0C4D9F92B0EE /* ConfigImporter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -214,6 +215,7 @@
 		4A2A1760280BA7FA00E13249 /* TISInputSource+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TISInputSource+Extension.swift"; sourceTree = "<group>"; };
 		4A2A1761280BA7FA00E13249 /* UserDefault.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
 		4A2A1763280BA7FA00E13249 /* CancelBag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CancelBag.swift; sourceTree = "<group>"; };
+		CF35BD14E14B0C4D9F92B0EE /* ConfigImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigImporter.swift; sourceTree = "<group>"; };
 		4A2A1765280BA7FA00E13249 /* NSMenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSMenuItem.swift; sourceTree = "<group>"; };
 		4A2A1766280BA7FA00E13249 /* i18n.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = i18n.swift; sourceTree = "<group>"; };
 		4A2A1767280BA7FA00E13249 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
@@ -438,6 +440,7 @@
 				4A0930882867E91100232089 /* AppsDiff.swift */,
 				4A2A1761280BA7FA00E13249 /* UserDefault.swift */,
 				4A2A1763280BA7FA00E13249 /* CancelBag.swift */,
+				CF35BD14E14B0C4D9F92B0EE /* ConfigImporter.swift */,
 				4A2A1766280BA7FA00E13249 /* i18n.swift */,
 				4AEEE08328126A4900C883F8 /* BrowserURL.swift */,
 				D58C184728A808F000F52845 /* KeyboardRestoreStrategy.swift */,
@@ -813,6 +816,7 @@
 				4AC50D6B283A72810034E894 /* NSColor.swift in Sources */,
 				4ACC9B812D2640F70002B8CE /* AddSwitchingGroupButton.swift in Sources */,
 				4A2A178C280BA7FA00E13249 /* CancelBag.swift in Sources */,
+				CFD89022254AB14A568D2D65 /* ConfigImporter.swift in Sources */,
 				4A4167302813CAE600CCC28C /* PreferencesVM+BrowserRule.swift in Sources */,
 				4A09308B28680A3200232089 /* NSViewHoverable.swift in Sources */,
 				D5115A1C2A33D0F700D94E51 /* IndicatorInfo.swift in Sources */,
@@ -1102,7 +1106,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 2.6.1;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.runjuu.Input-Source-Pro";
+				PRODUCT_BUNDLE_IDENTIFIER = "space.ooooo.Input-Source-Pro.Beta";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1139,7 +1143,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 2.6.1;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.runjuu.Input-Source-Pro";
+				PRODUCT_BUNDLE_IDENTIFIER = "space.ooooo.Input-Source-Pro.Beta";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
