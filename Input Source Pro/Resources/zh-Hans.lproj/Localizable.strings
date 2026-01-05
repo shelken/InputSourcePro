@@ -14,6 +14,8 @@
 "Star on GitHub" = "在 GitHub 上点星标";
 "Sponsor" = "赞助";
 "Share with friends" = "分享给朋友";
+"Also by Runju" = "Runju 的其他作品";
+"An AI-powered grammar checker that runs 100% locally" = "一款由 AI 驱动、100% 本地运行的语法检查工具";
 
 "General" = "通用";
 "Rules" = "规则";
@@ -26,14 +28,12 @@
 "System" = "系统";
 "Launch at Login" = "在登录时启动";
 "Display Icon in Menu Bar" = "在菜单栏中显示图标";
+"Support Spotlight-Like Apps" = "支持「聚焦」类应用";
 "Enhanced Mode" = "增强模式";
 "Enhanced Mode Description" = "启用增强模式让输入法提示位置更为准确，同时为「聚焦」类应用提供更完善的支持";
 "Enhanced Mode Permission Description" = "为了启用「增强模式」，Input Source Pro 需要你为它开启系统的「辅助功能」权限。";
 "Enhanced Mode Required Tips" = "开启此功能需先启用「增强模式」";
 "Open Accessibility Preferences" = "打开「辅助功能」设置";
-
-"Updates" = "更新";
-"Receive Beta Updates" = "接收测试版更新";
 
 "For All Apps and Websites" = "适用于所有应用和网站";
 "When Switching Back to the App or Website" = "切换回应用或网站时";
@@ -118,6 +118,12 @@
 "Restore Previously Used One" = "恢复上次使用的输入法";
 "Indicator" = "提示";
 "Hide Indicator" = "隐藏输入法提示";
+"Punctuation" = "标点符号";
+"ASCII Punctuation" = "ASCII 标点符号";
+"Force English Punctuation" = "强制使用英文标点符号";
+"Input Monitoring Required" = "需要输入监控权限";
+"This feature requires input monitoring permission to work" = "此功能需要输入监控权限才能使用";
+"Open Permission Settings" = "打开权限设置";
 "Add Running Apps" = "添加运行中的应用";
 "(unknown)" = "（未知）";
 

@@ -14,6 +14,8 @@
 "Star on GitHub" = "Star on GitHub";
 "Sponsor" = "Sponsor";
 "Share with friends" = "Share with friends";
+"Also by Runju" = "Also by Runju";
+"An AI-powered grammar checker that runs 100% locally" = "An AI-powered grammar checker that runs 100% locally";
 
 "General" = "General";
 "Rules" = "Rules";
@@ -31,9 +33,6 @@
 "Enhanced Mode Permission Description" = "Input Source Pro needs Accessibility permission to enable **Enhanced Mode**.";
 "Enhanced Mode Required Tips" = "This feature requires \"Enhanced Mode\" to be enabled.";
 "Open Accessibility Preferences" = "Open Accessibility Preferences";
-
-"Updates" = "Updates";
-"Receive Beta Updates" = "Receive Beta Updates";
 
 "For All Apps and Websites" = "For All Apps and Websites";
 "When Switching Back to the App or Website" = "When Switching Back to the App or Website";
@@ -117,6 +116,12 @@
 "Restore Previously Used One" = "Restore Previously Used One";
 "Indicator" = "Indicator";
 "Hide Indicator" = "Hide Indicator";
+"Punctuation" = "Punctuation";
+"ASCII Punctuation" = "ASCII Punctuation";
+"Force English Punctuation" = "Force English Punctuation";
+"Input Monitoring Required" = "Input Monitoring Required";
+"This feature requires input monitoring permission to work" = "This feature requires input monitoring permission to work";
+"Open Permission Settings" = "Open Permission Settings";
 "Add Running Apps" = "Add Running Apps";
 "(unknown)" = "(unknown)";
 

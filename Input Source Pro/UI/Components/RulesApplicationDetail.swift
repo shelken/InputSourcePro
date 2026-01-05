@@ -1,12 +1,59 @@
 import SwiftUI
 
 // 新增 ToggleLabel 组件
+private enum RulesApplicationDetailIconStyle {
+    static let size: CGFloat = 16
+    static var imageFont: Font { .system(size: size) }
+    static var textFont: Font { .system(size: size, weight: .regular, design: .rounded) }
+}
+
+private struct RulesApplicationDetailIcon: View {
+    enum Content {
+        case system(String)
+        case text(String)
+    }
+
+    let content: Content
+    let color: Color
+
+    init(systemName: String, color: Color = .primary) {
+        content = .system(systemName)
+        self.color = color
+    }
+
+    init(text: String, color: Color = .primary) {
+        content = .text(text)
+        self.color = color
+    }
+
+    var body: some View {
+        Group {
+            switch content {
+            case .system(let name):
+                Image(systemName: name)
+                    .font(RulesApplicationDetailIconStyle.imageFont)
+            case .text(let value):
+                Text(value)
+                    .font(RulesApplicationDetailIconStyle.textFont)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.6)
+            }
+        }
+        .foregroundColor(color)
+        .frame(
+            width: RulesApplicationDetailIconStyle.size,
+            height: RulesApplicationDetailIconStyle.size,
+            alignment: .center
+        )
+    }
+}
+
 struct ToggleLabel: View {
     let systemImageName: String
     let text: String
     var body: some View {
         HStack(spacing: 6) {
-            Image(systemName: systemImageName)
+            RulesApplicationDetailIcon(systemName: systemImageName)
             Text(text)
         }
     }
@@ -16,11 +63,13 @@ struct ApplicationDetail: View {
     @Binding var selectedApp: Set<AppRule>
 
     @EnvironmentObject var preferencesVM: PreferencesVM
+    @EnvironmentObject var permissionsVM: PermissionsVM
 
     @State var forceKeyboard: PickerItem?
     @State var doRestoreKeyboardState = NSToggleViewState.off
     @State var doNotRestoreKeyboardState = NSToggleViewState.off
     @State var hideIndicator = NSToggleViewState.off
+    @State var forceEnglishPunctuation = NSToggleViewState.off
 
     var mixed: Bool {
         Set(selectedApp.map { $0.forcedKeyboard?.id }).count > 1
@@ -60,8 +109,7 @@ struct ApplicationDetail: View {
                     .fontWeight(.medium)
 
                 HStack {
-                    Image(systemName: "d.circle.fill")
-                        .foregroundColor(.green)
+                    RulesApplicationDetailIcon(systemName: "d.circle.fill", color: .green)
                     NSToggleView(
                         label: restoreStrategyName(strategy: .UseDefaultKeyboardInstead),
                         state: preferencesVM.preferences.isRestorePreviouslyUsedInputSource
@@ -74,8 +122,7 @@ struct ApplicationDetail: View {
                 }
 
                 HStack {
-                    Image(systemName: "arrow.uturn.left.circle.fill")
-                        .foregroundColor(.blue)
+                    RulesApplicationDetailIcon(systemName: "arrow.uturn.left.circle.fill", color: .blue)
                     NSToggleView(
                         label: restoreStrategyName(strategy: .RestorePreviouslyUsedOne),
                         state: preferencesVM.preferences.isRestorePreviouslyUsedInputSource
@@ -95,14 +142,54 @@ struct ApplicationDetail: View {
                 Text("Indicator".i18n())
                     .fontWeight(.medium)
                 HStack {
-                    Image(systemName: "eye.slash.circle.fill")
-                        .foregroundColor(.gray)
+                    RulesApplicationDetailIcon(systemName: "eye.slash.circle.fill", color: .gray)
                     NSToggleView(
                         label: "Hide Indicator".i18n(),
                         state: hideIndicator,
                         onStateUpdate: handleToggleHideIndicator
                     )
                     .fixedSize()
+                }
+            }
+
+            Divider()
+                .padding(.vertical, 4)
+
+            VStack(alignment: .leading) {
+                HStack {
+                    Text("Punctuation".i18n())
+                        .fontWeight(.medium)
+                    Spacer()
+                    EnhancedModeRequiredBadge()
+                }
+                
+                HStack {
+                    RulesApplicationDetailIcon(text: "Aa", color: .orange)
+                    NSToggleView(
+                        label: "Force English Punctuation".i18n(),
+                        state: forceEnglishPunctuation,
+                        onStateUpdate: handleToggleForceEnglishPunctuation
+                    )
+                    .fixedSize()
+                    .disabled(!preferencesVM.preferences.isEnhancedModeEnabled)
+                }
+                
+                if selectedApp.contains(where: { $0.forceEnglishPunctuation }) && !PermissionsVM.checkInputMonitoring(prompt: false) {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("This feature requires input monitoring permission to work".i18n())
+
+                        HStack {
+                            Spacer()
+                            Button("Open Permission Settings".i18n()) {
+                                NSWorkspace.shared.openInputMonitoringPreferences()
+                            }
+                        }
+                    }
+                    .padding(8)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .background(NSColor.background1.color)
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                    .padding(.top)
                 }
             }
 
@@ -120,6 +207,7 @@ struct ApplicationDetail: View {
             updateDoRestoreKeyboardState()
             updateDoNotRestoreKeyboardState()
             updateHideIndicatorState()
+            updateForceEnglishPunctuationState()
         }
     }
 
@@ -160,6 +248,16 @@ struct ApplicationDetail: View {
             hideIndicator = .mixed
         } else {
             hideIndicator = stateSet.first == true ? .on : .off
+        }
+    }
+
+    func updateForceEnglishPunctuationState() {
+        let stateSet = Set(selectedApp.map { $0.forceEnglishPunctuation })
+
+        if stateSet.count > 1 {
+            forceEnglishPunctuation = .mixed
+        } else {
+            forceEnglishPunctuation = stateSet.first == true ? .on : .off
         }
     }
 
@@ -206,6 +304,23 @@ struct ApplicationDetail: View {
         case .off, .mixed:
             selectedApp.forEach { preferencesVM.setHideIndicator($0, true) }
             hideIndicator = .on
+            return .on
+        }
+    }
+
+    func handleToggleForceEnglishPunctuation() -> NSControl.StateValue {
+        switch forceEnglishPunctuation {
+        case .on:
+            selectedApp.forEach { preferencesVM.setForceEnglishPunctuation($0, false) }
+            forceEnglishPunctuation = .off
+            return .off
+        case .off, .mixed:
+            selectedApp.forEach { preferencesVM.setForceEnglishPunctuation($0, true) }
+            forceEnglishPunctuation = .on
+            
+            if !PermissionsVM.checkInputMonitoring(prompt: false) {
+                PermissionsVM.checkInputMonitoring(prompt: true)
+            }
             return .on
         }
     }

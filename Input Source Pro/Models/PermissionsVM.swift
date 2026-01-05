@@ -1,5 +1,6 @@
 import AppKit
 import Combine
+import IOKit
 
 @MainActor
 final class PermissionsVM: ObservableObject {
@@ -7,6 +8,16 @@ final class PermissionsVM: ObservableObject {
     static func checkAccessibility(prompt: Bool) -> Bool {
         let checkOptPrompt = kAXTrustedCheckOptionPrompt.takeUnretainedValue() as NSString
         return AXIsProcessTrustedWithOptions([checkOptPrompt: prompt] as CFDictionary?)
+    }
+
+    @discardableResult
+    static func checkInputMonitoring(prompt: Bool) -> Bool {
+        if prompt {
+            return IOHIDRequestAccess(kIOHIDRequestTypeListenEvent)
+        } else {
+            let access = IOHIDCheckAccess(kIOHIDRequestTypeListenEvent)
+            return access == kIOHIDAccessTypeGranted
+        }
     }
 
     @Published var isAccessibilityEnabled = PermissionsVM.checkAccessibility(prompt: false)

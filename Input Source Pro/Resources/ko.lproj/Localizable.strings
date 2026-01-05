@@ -14,6 +14,8 @@
 "Star on GitHub" = "GitHub에서 별 주기";
 "Sponsor" = "후원";
 "Share with friends" = "친구와 공유하기";
+"Also by Runju" = "Runju의 다른 앱";
+"An AI-powered grammar checker that runs 100% locally" = "AI 기반 문법 검사기로, 100% 로컬에서 동작합니다";
 
 "General" = "일반";
 "Rules" = "규칙";
@@ -31,9 +33,6 @@
 "Enhanced Mode Permission Description" = "Input Source Pro는 **고급 모드**를 활성화하기 위해 접근성 권한이 필요합니다.";
 "Enhanced Mode Required Tips" = "이 기능은 \"고급 모드\"가 활성화되어야 사용할 수 있습니다.";
 "Open Accessibility Preferences" = "접근성 설정 열기";
-
-"Updates" = "업데이트";
-"Receive Beta Updates" = "베타 업데이트 받기";
 
 "For All Apps and Websites" = "모든 앱 및 웹사이트에 대하여";
 "When Switching Back to the App or Website" = "앱이나 웹사이트로 돌아갈 때";
@@ -117,6 +116,12 @@
 "Restore Previously Used One" = "이전에 사용한 것 복원";
 "Indicator" = "표시기";
 "Hide Indicator" = "표시기 숨기기";
+"Punctuation" = "구두점";
+"ASCII Punctuation" = "ASCII 구두점";
+"Force English Punctuation" = "영어 구두점 강제 사용";
+"Input Monitoring Required" = "입력 모니터링 권한 필요";
+"This feature requires input monitoring permission to work" = "이 기능을 사용하려면 입력 모니터링 권한이 필요합니다";
+"Open Permission Settings" = "권한 설정 열기";
 "Add Running Apps" = "실행 중인 앱 추가";
 "(unknown)" = "(알 수 없음)";
 

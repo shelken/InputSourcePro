@@ -15,4 +15,8 @@ extension AppRule {
 
         return InputSource.sources.first { $0.id == inputSourceId }
     }
+    
+    var shouldForceEnglishPunctuation: Bool {
+        return forceEnglishPunctuation
+    }
 }
